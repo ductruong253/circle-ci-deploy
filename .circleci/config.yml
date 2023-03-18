@@ -27,6 +27,6 @@ jobs:
       - destroy_environment
 
 workflows:
-  my_workflows:
+  my_workflow:
     jobs:
       - create-infrastructure

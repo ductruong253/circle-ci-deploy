@@ -83,11 +83,9 @@ jobs:
             ansible-playbook -i inventory main-playbook.yml
 
 workflows:
-  # Name the workflow "welcome"
   my_workflow:
-    # Run the welcome/run job in its own container
     jobs:
       - create_infrastructure
       - configure_infrastructure:
-        requires:
-          - create_infrastructure
+          requires:
+            - create_infrastructure

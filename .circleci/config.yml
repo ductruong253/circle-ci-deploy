@@ -75,6 +75,11 @@ jobs:
       - run:
           name: Configure server
           command: |
+            aws ec2 describe-instances \
+            \
+                --query 'Reservations[*].Instances[*].PublicIpAddress' \
+                  --filters "Name=tag:Project,Values=udacity" \
+                  --output text >> inventory
             ansible-playbook -i inventory main-playbook.yml
 
 workflows:
@@ -83,4 +88,6 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - create_infrastructure
-      - configure_infrastructure
+      - configure_infrastructure:
+        requires:
+          - create_infrastructure

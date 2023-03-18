@@ -71,16 +71,17 @@ jobs:
           name: Install dependencies
           command: |
             # install the dependencies needed for your playbook
-            apk add --update ansible    
+            apk add --update ansible
       - run:
           name: Configure server
           command: |
             ansible-playbook -i inventory main-playbook.yml
+      - destroy_environment
 
 workflows:
   my_workflow:
     jobs:
       # - create_infrastructure
       - configure_infrastructure
-          # requires:
-          #   - create_infrastructure
+        # requires:
+        #   - create_infrastructure
